@@ -16,14 +16,16 @@ class App extends React.PureComponent {
       <Router>
         <div className="App">
           {this.props.user ? (
-            <nav>
-              <span>{this.props.user}</span>
-              <button onClick={this.handleOnClick}>Logout</button>
-            </nav>
+            <>
+              <nav>
+                <span>{this.props.user}</span>
+                <button onClick={this.handleOnClick}>Logout</button>
+              </nav>
+              <Route path="/" exact component={Polls} />
+            </>
           ) : (
             <Redirect to={"/login"} />
           )}
-          <Route path="/" exact component={Polls} />
           <Route path="/login" component={Login} />
         </div>
       </Router>
