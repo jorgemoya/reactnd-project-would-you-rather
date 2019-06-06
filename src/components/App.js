@@ -1,11 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Link
+} from "react-router-dom";
 import { connect } from "react-redux";
 import { handleFetchUsers } from "./../actions/users";
 import { logout } from "./../actions/auth";
 import Polls from "./Polls";
 import Poll from "./Poll";
 import Login from "./Login";
+import NewPoll from "./NewPoll";
 
 class App extends React.PureComponent {
   componentDidMount() {
@@ -19,11 +25,14 @@ class App extends React.PureComponent {
           {this.props.user ? (
             <>
               <nav>
+                <Link to={"/"}>Home</Link>
+                <Link to={"/add"}>New Question</Link>
                 <span>{this.props.user}</span>
                 <button onClick={this.handleOnClick}>Logout</button>
               </nav>
               <Route path="/" exact component={Polls} />
               <Route path="/questions/:pid" component={Poll} />
+              <Route path="/add" component={NewPoll} />
             </>
           ) : (
             <Redirect to={"/login"} />

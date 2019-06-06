@@ -1,6 +1,7 @@
-import { _getQuestions, _saveQuestionAnswer } from "../_DATA";
+import { _getQuestions, _saveQuestionAnswer, _saveQuestion } from "../_DATA";
 
 export const ADD_POLLS = "ADD_POLLS";
+const CREATE_NEW_POLL = "CREATE_NEW_POLL";
 const FETCH_POLLS = "FETCH_POLLS";
 const SAVE_POLL_ANSWER = "SAVE_POLL_ANSWER";
 
@@ -8,6 +9,12 @@ function addPolls(questions) {
   return {
     type: ADD_POLLS,
     payload: questions
+  };
+}
+
+function createNewPoll() {
+  return {
+    type: CREATE_NEW_POLL
   };
 }
 
@@ -20,6 +27,16 @@ function fetchPolls() {
 function savePollAnswer() {
   return {
     type: SAVE_POLL_ANSWER
+  };
+}
+
+export function handleCreateNewPoll(poll) {
+  return dispatch => {
+    dispatch(createNewPoll());
+
+    return _saveQuestion(poll).catch(() => {
+      alert("There was an error. Try again.");
+    });
   };
 }
 
