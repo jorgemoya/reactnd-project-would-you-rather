@@ -2,7 +2,7 @@ import React from "react";
 import { handleFetchPolls } from "../actions/polls";
 import { connect } from "react-redux";
 import { answeredPolls, unansweredPolls } from "./../selectors/polls";
-import Poll from "./Poll";
+import PollBrief from "./PollBrief";
 
 class Polls extends React.PureComponent {
   componentDidMount() {
@@ -18,7 +18,9 @@ class Polls extends React.PureComponent {
         <div>
           <ul>
             {unansweredPolls.map(poll => (
-              <Poll key={poll.id} poll={poll} />
+              <li key={poll.id}>
+                <PollBrief poll={poll} />
+              </li>
             ))}
           </ul>
         </div>
@@ -26,7 +28,9 @@ class Polls extends React.PureComponent {
         <div>
           <ul>
             {answeredPolls.map(poll => (
-              <Poll key={poll.id} poll={poll} />
+              <li key={poll.id}>
+                <PollBrief poll={poll} />
+              </li>
             ))}
           </ul>
         </div>

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { handleFetchUsers } from "./../actions/users";
 import { logout } from "./../actions/auth";
 import Polls from "./Polls";
+import Poll from "./Poll";
 import Login from "./Login";
 
 class App extends React.PureComponent {
@@ -22,6 +23,7 @@ class App extends React.PureComponent {
                 <button onClick={this.handleOnClick}>Logout</button>
               </nav>
               <Route path="/" exact component={Polls} />
+              <Route path="/questions/:pid" component={Poll} />
             </>
           ) : (
             <Redirect to={"/login"} />
