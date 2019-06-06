@@ -12,6 +12,7 @@ import Polls from "./Polls";
 import Poll from "./Poll";
 import Login from "./Login";
 import NewPoll from "./NewPoll";
+import Leaderboard from "./Leaderboard";
 
 class App extends React.PureComponent {
   componentDidMount() {
@@ -27,12 +28,14 @@ class App extends React.PureComponent {
               <nav>
                 <Link to={"/"}>Home</Link>
                 <Link to={"/add"}>New Question</Link>
+                <Link to={"/leaderboard"}>Leaderboard</Link>
                 <span>{this.props.user}</span>
                 <button onClick={this.handleOnClick}>Logout</button>
               </nav>
               <Route path="/" exact component={Polls} />
               <Route path="/questions/:pid" component={Poll} />
               <Route path="/add" component={NewPoll} />
+              <Route path="/leaderboard" component={Leaderboard} />
             </>
           ) : (
             <Redirect to={"/login"} />
