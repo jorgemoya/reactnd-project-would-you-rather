@@ -17,6 +17,7 @@ class Leaderboard extends React.PureComponent {
         <thead>
           <tr>
             <th>User</th>
+            <th />
             <th>Answered questions</th>
             <th>Created questions</th>
             <th>Score</th>
@@ -26,6 +27,9 @@ class Leaderboard extends React.PureComponent {
           {leaderboardStats.map(user => (
             <tr key={user.id}>
               <td>{user.id}</td>
+              <td>
+                <img src={user.avatar} alt={user.id} />
+              </td>
               <td>{user.answers}</td>
               <td>{user.questions}</td>
               <td>{user.total}</td>

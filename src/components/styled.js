@@ -91,6 +91,11 @@ export const PollText = styled.div`
 export const LeaderboardContainer = styled.table`
   text-align: center;
   border-spacing: 50px 25px;
+
+  img {
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 export const LoginContainer = styled.div`

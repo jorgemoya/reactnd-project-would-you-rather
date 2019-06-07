@@ -12,6 +12,7 @@ export const getLeaderboardStats = createSelector(
         return {
           answers,
           id: users[uid].id,
+          avatar: users[uid].avatarURL,
           questions,
           total: answers + questions
         };
