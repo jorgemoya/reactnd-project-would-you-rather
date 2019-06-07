@@ -6,7 +6,8 @@ import { PollContainer, PollAuthor, PollText } from "./styled";
 
 class Poll extends React.PureComponent {
   state = {
-    showAnswers: false
+    showAnswers: false,
+    votedFor: null
   };
 
   componentDidMount() {
@@ -44,6 +45,9 @@ class Poll extends React.PureComponent {
                 {optionTwo.votes.length} out of {totalVotes} votes --{" "}
                 {Math.floor((optionTwo.votes.length / totalVotes) * 100) || 0}%
               </span>
+              <p>
+                You voted for <strong>{this.getChosenAnswer()}</strong>.
+              </p>
             </PollText>
           </PollContainer>
         ) : (
@@ -93,6 +97,26 @@ class Poll extends React.PureComponent {
       this.setState({ showAnswers: true });
     }
   };
+
+  getChosenAnswer() {
+    if (
+      this.props.poll.optionOne.votes.find(
+        votes => this.props.users[this.props.user].id === votes
+      )
+    ) {
+      return "option 1";
+    }
+
+    if (
+      this.props.poll.optionTwo.votes.find(
+        votes => this.props.users[this.props.user].id === votes
+      )
+    ) {
+      return "option 2";
+    }
+
+    return "";
+  }
 }
 
 function mapStateToProps(state, props) {
