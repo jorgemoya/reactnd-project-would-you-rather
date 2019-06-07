@@ -34,9 +34,11 @@ export function handleCreateNewPoll(poll) {
   return dispatch => {
     dispatch(createNewPoll());
 
-    return _saveQuestion(poll).catch(() => {
-      alert("There was an error. Try again.");
-    });
+    return _saveQuestion(poll)
+      .then(() => dispatch(handleFetchPolls()))
+      .catch(() => {
+        alert("There was an error. Try again.");
+      });
   };
 }
 

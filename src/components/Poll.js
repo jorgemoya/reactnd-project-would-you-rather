@@ -37,12 +37,12 @@ class Poll extends React.PureComponent {
               <p>Would you rather {optionOne.text}</p>
               <span>
                 {optionOne.votes.length} out of {totalVotes} votes --{" "}
-                {Math.floor((optionOne.votes.length / totalVotes) * 100)}%
+                {Math.floor((optionOne.votes.length / totalVotes) * 100) || 0}%
               </span>
               <p>Would you rather {optionTwo.text}</p>
               <span>
                 {optionTwo.votes.length} out of {totalVotes} votes --{" "}
-                {Math.floor((optionTwo.votes.length / totalVotes) * 100)}%
+                {Math.floor((optionTwo.votes.length / totalVotes) * 100) || 0}%
               </span>
             </PollText>
           </PollContainer>

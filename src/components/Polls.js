@@ -1,5 +1,4 @@
 import React from "react";
-import { handleFetchPolls } from "../actions/polls";
 import { connect } from "react-redux";
 import { answeredPolls, unansweredPolls } from "./../selectors/polls";
 import PollBrief from "./PollBrief";
@@ -9,10 +8,6 @@ class Polls extends React.PureComponent {
   state = {
     show: "unanswered"
   };
-
-  componentDidMount() {
-    this.props.dispatch(handleFetchPolls());
-  }
 
   render() {
     const { answeredPolls, unansweredPolls } = this.props;

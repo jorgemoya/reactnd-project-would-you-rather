@@ -16,10 +16,12 @@ import NewPoll from "./NewPoll";
 import Leaderboard from "./Leaderboard";
 import NoMatch from "./NoMatch";
 import { Nav, NavItem, UserNavItem } from "./styled";
+import { handleFetchPolls } from "../actions/polls";
 
 class App extends React.PureComponent {
   componentDidMount() {
     this.props.dispatch(handleFetchUsers());
+    this.props.dispatch(handleFetchPolls());
   }
 
   render() {
@@ -51,7 +53,10 @@ class App extends React.PureComponent {
               </Nav>
               <Switch>
                 <Route exact path="/" component={Polls} />
-                <Route path="/questions/:pid" component={Poll} />
+                <Route
+                  path={`/questions/:pid(${this.generateRegex()})`}
+                  component={Poll}
+                />
                 <Route path="/add" component={NewPoll} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route component={NoMatch} />
@@ -69,12 +74,17 @@ class App extends React.PureComponent {
   handleOnClick = () => {
     this.props.dispatch(logout());
   };
+
+  generateRegex() {
+    return Object.keys(this.props.polls).join("|");
+  }
 }
 
-function mapStateToProps({ auth, users }) {
+function mapStateToProps({ auth, users, polls }) {
   return {
     user: auth.user,
-    users
+    users,
+    polls
   };
 }
 
