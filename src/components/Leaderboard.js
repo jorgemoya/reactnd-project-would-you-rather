@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleFetchUsers } from "./../actions/users";
 import { getLeaderboardStats } from "../selectors/users";
+import { LeaderboardContainer } from "./styled";
 
 class Leaderboard extends React.PureComponent {
   componentDidMount() {
@@ -12,18 +13,26 @@ class Leaderboard extends React.PureComponent {
     const { leaderboardStats } = this.props;
 
     return (
-      <ul>
-        {leaderboardStats.map(user => (
-          <li key={user.id}>
-            <div>
-              <span>{user.id}</span>
-              <span>Answered questions: {user.answers}</span>
-              <span>Created questions: {user.questions}</span>
-              <span>Score {user.total}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <LeaderboardContainer>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Answered questions</th>
+            <th>Created questions</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {leaderboardStats.map(user => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.answers}</td>
+              <td>{user.questions}</td>
+              <td>{user.total}</td>
+            </tr>
+          ))}
+        </tbody>
+      </LeaderboardContainer>
     );
   }
 }

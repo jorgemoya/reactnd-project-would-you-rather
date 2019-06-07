@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleSavePollAnswer } from "./../actions/polls";
 import { answeredPolls, getPoll } from "../selectors/polls";
+import { PollContainer, PollAuthor, PollText } from "./styled";
 
 class Poll extends React.PureComponent {
   state = {
@@ -23,49 +24,56 @@ class Poll extends React.PureComponent {
   render() {
     const { author, optionOne, optionTwo } = this.props.poll;
     const totalVotes = optionOne.votes.length + optionTwo.votes.length;
-    // const user = this.props.users[author];
+    const user = this.props.users[author];
 
     return (
       <div>
         {this.state.showAnswers ? (
-          <>
-            <h2>Results:</h2>
-            <p>Would you rather {optionOne.text}</p>
-            <span>
-              {optionOne.votes.length} out of {totalVotes} votes
-            </span>
-            <p>Would you rather {optionTwo.text}</p>
-            <span>
-              {optionTwo.votes.length} out of {totalVotes} votes
-            </span>
-          </>
+          <PollContainer>
+            <PollText>
+              <p>
+                <strong>Results:</strong>
+              </p>
+              <p>Would you rather {optionOne.text}</p>
+              <span>
+                {optionOne.votes.length} out of {totalVotes} votes
+              </span>
+              <p>Would you rather {optionTwo.text}</p>
+              <span>
+                {optionTwo.votes.length} out of {totalVotes} votes
+              </span>
+            </PollText>
+          </PollContainer>
         ) : (
-          <>
-            <h2>
-              {/* <img src={user.avatarURL} /> */}
-              {author} asks
-            </h2>
+          <PollContainer>
+            <PollAuthor>
+              <img src={user.avatarURL} alt={author} />
+              {this.props.users[author].name} asks
+            </PollAuthor>
             <form onSubmit={this.handleOnSubmit}>
-              <span>Would you rather</span>
-              <div>
-                <input
-                  type="radio"
-                  name="option"
-                  id="option-1"
-                  value="optionOne"
-                />
-                <label htmlFor="option-1">{optionOne.text}</label>
-                <input
-                  type="radio"
-                  name="option"
-                  id="option-2"
-                  value="optionTwo"
-                />
-                <label htmlFor="option-2">{optionTwo.text}</label>
-              </div>
+              <PollText>
+                <span>Would you rather</span>
+                <p>
+                  <input
+                    type="radio"
+                    name="option"
+                    id="option-1"
+                    value="optionOne"
+                  />
+                  <label htmlFor="option-1">{optionOne.text}</label>
+                  <br />
+                  <input
+                    type="radio"
+                    name="option"
+                    id="option-2"
+                    value="optionTwo"
+                  />
+                  <label htmlFor="option-2">{optionTwo.text}</label>
+                </p>
+              </PollText>
               <button type="submit">Submit</button>
             </form>
-          </>
+          </PollContainer>
         )}
       </div>
     );

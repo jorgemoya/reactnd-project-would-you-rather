@@ -1,13 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { login } from "./../actions/auth";
+import { LoginContainer } from "./styled";
 
 class Login extends React.PureComponent {
   render() {
     const { users } = this.props;
 
     return (
-      <>
+      <LoginContainer>
+        <p>Choose a user to login:</p>
         {Object.keys(users).length > 0 ? (
           <select onChange={this.handleOnChange}>
             <option>Choose username</option>
@@ -20,7 +22,7 @@ class Login extends React.PureComponent {
         ) : (
           <div>Loading...</div>
         )}
-      </>
+      </LoginContainer>
     );
   }
 

@@ -1,23 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { PollContainer, PollAuthor, PollText } from "./styled";
+import { connect } from "react-redux";
 
-export default class PollBrief extends React.PureComponent {
+class PollBrief extends React.PureComponent {
   render() {
-    // const user = this.props.users[author];
     const { author, id, optionOne, optionTwo } = this.props.poll;
+    const user = this.props.users[author];
 
     return (
-      <>
-        <h2>
-          {/* <img src={user.avatarURL} /> */}
-          {author} asks
-        </h2>
-        <span>Would you rather</span>
-        <p>
-          {optionOne.text} or {optionTwo.text}
-        </p>
-        <Link to={`/questions/${id}`}>View Poll</Link>
-      </>
+      <PollContainer>
+        <PollAuthor>
+          <img src={user.avatarURL} alt={author} />
+          {this.props.users[author].name} asks
+        </PollAuthor>
+        <PollText>
+          <span>Would you rather</span>
+          <p>
+            {optionOne.text} <strong>or</strong> {optionTwo.text}
+          </p>
+        </PollText>
+        <button>
+          <Link to={`/questions/${id}`}>View Poll</Link>
+        </button>
+      </PollContainer>
     );
   }
 }
+
+function mapStateToProps({ users }) {
+  return {
+    users
+  };
+}
+
+export default connect(mapStateToProps)(PollBrief);

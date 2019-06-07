@@ -1,21 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
 import { handleCreateNewPoll } from "./../actions/polls";
+import { PollContainer, PollText } from "./styled";
 
 class NewPoll extends React.PureComponent {
   render() {
     return (
-      <>
-        <h2>Create New Poll</h2>
-        <span>Complete the question:</span>
-        <form onSubmit={this.handleOnSubmit}>
-          <span>Would you rather...</span>
-          <input type="text" name="optionOne" />
-          <span>or</span>
-          <input type="text" name="optionTwo" />
-          <button type="submit">Submit</button>
-        </form>
-      </>
+      <PollContainer>
+        <PollText>
+          <h2>Create New Poll</h2>
+          <h3>Complete the question:</h3>
+          <form onSubmit={this.handleOnSubmit}>
+            <span>Would you rather...</span>
+            <p>
+              <input type="text" name="optionOne" />
+            </p>
+            <span>or</span>
+            <p>
+              <input type="text" name="optionTwo" />
+            </p>
+            <button type="submit">Submit</button>
+          </form>
+        </PollText>
+      </PollContainer>
     );
   }
 
