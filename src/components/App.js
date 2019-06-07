@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  NavLink
+  NavLink,
+  Switch
 } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleFetchUsers } from "./../actions/users";
@@ -13,6 +14,7 @@ import Poll from "./Poll";
 import Login from "./Login";
 import NewPoll from "./NewPoll";
 import Leaderboard from "./Leaderboard";
+import NoMatch from "./NoMatch";
 import { Nav, NavItem, UserNavItem } from "./styled";
 
 class App extends React.PureComponent {
@@ -28,7 +30,9 @@ class App extends React.PureComponent {
             <>
               <Nav>
                 <NavItem>
-                  <NavLink to={"/"} exact>Home</NavLink>
+                  <NavLink to={"/"} exact>
+                    Home
+                  </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink to={"/add"}>New Poll</NavLink>
@@ -45,10 +49,13 @@ class App extends React.PureComponent {
                   <button onClick={this.handleOnClick}>Logout</button>
                 </UserNavItem>
               </Nav>
-              <Route exact path="/" component={Polls} />
-              <Route path="/questions/:pid" component={Poll} />
-              <Route path="/add" component={NewPoll} />
-              <Route path="/leaderboard" component={Leaderboard} />
+              <Switch>
+                <Route exact path="/" component={Polls} />
+                <Route path="/questions/:pid" component={Poll} />
+                <Route path="/add" component={NewPoll} />
+                <Route path="/leaderboard" component={Leaderboard} />
+                <Route component={NoMatch} />
+              </Switch>
             </>
           ) : (
             <Redirect push to={"/login"} />
