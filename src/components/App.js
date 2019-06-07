@@ -38,7 +38,7 @@ class App extends React.PureComponent {
               <Route path="/leaderboard" component={Leaderboard} />
             </>
           ) : (
-            <Redirect to={"/login"} />
+            <Redirect push to={"/login"} />
           )}
           <Route path="/login" component={Login} />
         </div>

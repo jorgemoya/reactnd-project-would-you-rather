@@ -28,8 +28,7 @@ class Login extends React.PureComponent {
     const username = event.target.value;
     this.props.dispatch(login(username));
 
-    // TODO: fix push
-    this.props.history.push("/");
+    this.props.history.goBack();
   };
 }
 
