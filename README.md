@@ -8,8 +8,8 @@ Application will need a logged in user to be usable.
 
 ## Instructions to run
 
-`yarn`
-`yarn run start`
+* `yarn`
+* `yarn run start`
 
 ## Developed by
 
